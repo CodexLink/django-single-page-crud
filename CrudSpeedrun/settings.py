@@ -25,7 +25,7 @@ SECRET_KEY = '=my811yrxad8atwyapvony5xj0y0gak-h-#3unpc@$815np@in'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [*]
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -56,7 +56,9 @@ ROOT_URLCONF = 'CrudSpeedrun.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "template_modulars"),
+                 os.path.join(BASE_DIR, "template_reusables")
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,8 +127,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static_src/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'public_statics')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'build_static')
 
 AUTH_USER_MODEL = 'CrudSimulation.UserCredentials'
 
