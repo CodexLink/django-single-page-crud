@@ -13,3 +13,11 @@ UserData = (
     ("General Researcher", "General Researcher"),
     ("Resource Researcher", "Resource Researcher"),
 )
+
+TaskTypes = (
+    ("Chores", "Chores"),
+    ("Important Work", "Important Work"),
+    ("Request", "Request"),
+    ("Collaboration", "Collaboration"),
+    ("Errands", "Errands"),
+)
