@@ -13,59 +13,89 @@ from django.contrib.auth import login, logout
 from .forms import *
 from .models import *
 
-# main_template view...
+template_RequiredEncapped = "elemInstanceViewer.html"
 
-class DataView(PermissionRequiredMixin, TemplateView):
-    pass
+class DataView(LoginRequiredMixin, TemplateView):
+    login_url = reverse_lazy('auth_user_view')
+    template_name = template_RequiredEncapped
+    redirect_field_name = reverse_lazy('deauth_user_view')
+
+
+    more_context = {
+        "title_view": "Dashboard",
+        "ClassInstance": str(__qualname__)
+    }
+
+    def get_context_data(self, **kwargs):
+        current_user = self.request.user
+        view_context = super(DataView, self).get_context_data(**kwargs)
+        view_context['user_instance_name'] = '%s %s %s' % (current_user.first_name, current_user.middle_name if current_user.middle_name is not None else '', current_user.last_name)
+        view_context['user_branch'] = current_user.dept_residence
+
+        view_context['ClassInstance'] = self.more_context['ClassInstance']
+        return view_context
+
+    def handle_no_permission(self):
+        self.raise_exception = self.request.user.is_authenticated
+        if self.raise_exception:
+            messages.error(self.request, "InsufficientPermission")
+        else:
+            messages.error(self.request, "PermissionAccessDenied")
+        return super(DataView, self).handle_no_permission()
 
 class UserAuthView(LoginView):
-    pass
-    # template_name = template_view
-    # form_class = UserAuthForm
-    # success_url = reverse_lazy('dashboard_user_view')
-    # redirect_authenticated_user = True
+    template_name = template_RequiredEncapped
+    form_class = AuthForm
+    success_url = reverse_lazy('data_user_view')
+    redirect_authenticated_user = True
 
-    # more_context = {
-    #     "title_view": "User Login",
-    #     "ClassInstance": str(__qualname__),
-    # }
+    more_context = {
+        "ClassInstance": str(__qualname__),
+    }
 
+    def get_context_data(self, **kwargs):
+       view_context = super(UserAuthView, self).get_context_data(**kwargs)
+       view_context['ClassInstance'] = self.more_context['ClassInstance']
 
-    # def get_context_data(self, **kwargs):
-    #     view_context = super(AuthUserView, self).get_context_data(**kwargs)
-    #     view_context['title_view'] = self.more_context['title_view']
-    #     view_context['ClassInstance'] = self.more_context['ClassInstance']
+       return view_context
 
-    #     return view_context
-
-    # def get_success_url(self):
-    #     return self.success_url
-
+    def get_success_url(self):
+        return self.success_url
 
 class UserDeauthView(LoginRequiredMixin, LogoutView):
-    pass
-    # template_name = template_view
 
-    # login_url = reverse_lazy('auth_user_view')
-    # next_page = login_url
+    template_name = template_RequiredEncapped
 
-    # def dispatch(self, request):
-    #      if request.user.is_authenticated:
-    #         messages.success(self.request, "UserLoggedOut")
-    #     return super(DeauthUserView, self).dispatch(request)
+    login_url = reverse_lazy('auth_user_view')
+    next_page = login_url
 
-    # def handle_no_permission(self):
-    #     messages.error(self.request, "UserAlreadyLoggedOut")
-    #     return super(DeauthUserView ,self).handle_no_permission()
+    def dispatch(self, request):
+        if request.user.is_authenticated:
+           messages.success(self.request, "UserLoggedOut")
+           print("UserLoggedOut")
+        return super(UserDeauthView, self).dispatch(request)
 
-class DataAddition(PermissionRequiredMixin, TemplateView):
-        # permission_required = 'SCControlSystem.classroom_action_log_viewable'
-    pass
+    def handle_no_permission(self):
+       messages.error(self.request, "UserAlreadyLoggedOut")
+       print("UserAlreadyLoggedOut")
+       return super(UserDeauthView ,self).handle_no_permission()
 
-class DataDeletion(PermissionRequiredMixin, TemplateView):
-        # permission_required = 'SCControlSystem.classroom_action_log_viewable'
-    pass
+class DataAddition(LoginRequiredMixin, TemplateView):
+    template_name = template_RequiredEncapped
 
-class DataUpdate(PermissionRequiredMixin, TemplateView):
-        # permission_required = 'SCControlSystem.classroom_action_log_viewable'
-    pass
+    login_url = reverse_lazy('auth_user_view')
+    next_page = login_url
+
+
+class DataDeletion(LoginRequiredMixin, TemplateView):
+    template_name = template_RequiredEncapped
+
+    login_url = reverse_lazy('auth_user_view')
+    next_page = login_url
+
+
+class DataUpdate(LoginRequiredMixin, TemplateView):
+    template_name = template_RequiredEncapped
+
+    login_url = reverse_lazy('auth_user_view')
+    next_page = login_url
