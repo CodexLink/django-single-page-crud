@@ -1,4 +1,4 @@
-UserData = (
+UserTypes = (
     ("Leader", "Leader"),
     ("Co-Leader", "Co-Leader"),
     ("Project Assistant", "Project Assistant"),
