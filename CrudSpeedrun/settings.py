@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'CrudSimulation.apps.CrudsimulationConfig',
     'django_extensions',
-    'CrudSimulation.apps.CrudsimulationConfig'
 ]
 
 MIDDLEWARE = [
@@ -56,8 +56,9 @@ ROOT_URLCONF = 'CrudSpeedrun.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "template_modulars"),
-                 os.path.join(BASE_DIR, "template_reusables")
+        'DIRS': [os.path.join(BASE_DIR, "CrudSimulation/template_modulars"),
+                 os.path.join(BASE_DIR, "CrudSimulation/template_reusables"),
+                 os.path.join(BASE_DIR, "CrudSimulation/template_context")
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -129,6 +130,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'build_static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 AUTH_USER_MODEL = 'CrudSimulation.UserCredentials'
 
