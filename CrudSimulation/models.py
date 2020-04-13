@@ -5,7 +5,7 @@ from .additionals.metaData import *
 
 # Create your models here.
 def user_src_avatar_path(instance, filename):
-    return 'userdata/avatar_{0}/{1}'.format(instance.unique_id, filename)
+    return 'userdata/avatar_{0}/{1}'.format(instance.uuid, filename)
 
 class UserDepartment(models.Model):
     class Meta:
@@ -24,7 +24,7 @@ class UserRoles(models.Model):
         verbose_name = "User Role"
         db_table = "user_roles"
 
-    Role_Name = models.CharField(max_length=32, null=False, blank=False, unique=True, verbose_name="User Role Name", help_text="A group-scoped identifier used to name what they really are. Selected Role is allowed.")
+    Role_Name = models.CharField(max_length=32, null=False, blank=False, unique=True, choices=UserTypes, default=UserTypes[0][0], verbose_name="User Role Name", help_text="A group-scoped identifier used to name what they really are. Selected Role is allowed.")
     Role_Description = models.CharField(max_length=64, null=False, blank=False, verbose_name="User Role Description", help_text="A identifier description. Write anything that you like here based from what you interpret to this particular role.")
 
     def __str__(self):
