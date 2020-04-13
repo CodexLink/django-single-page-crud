@@ -15,8 +15,8 @@ class UserRolesAttributes(admin.ModelAdmin):
 
 class UserCredentialsAttributes(UserAdmin):
     model = UserCredentials
-    list_display = ("first_name", "middle_name", "role", "dept_residence")
-    list_filter = ("first_name", "middle_name", "role", "dept_residence")
+    list_display = ("username", "first_name", "middle_name", "role", "dept_residence", 'is_active' ,'is_staff', 'is_superuser', 'date_joined')
+    list_filter = ("username", "first_name", "middle_name", "role", "dept_residence", 'is_active' ,'is_staff', 'is_superuser', 'date_joined')
     readonly_fields = ("uuid", )
     fieldsets =  (
         ('User Credentials', {
@@ -63,6 +63,7 @@ class UserTasksAttributes(admin.ModelAdmin):
     model = UserTasks
     list_display = ("Task_Name", "Task_Description", "Task_Type")
     list_filter = ("Task_Name", "Task_Description", "Task_Type")
+
 admin.site.register(UserDepartment, UserDepartmentAttributes)
 admin.site.register(UserRoles, UserRolesAttributes)
 admin.site.register(UserCredentials, UserCredentialsAttributes)
