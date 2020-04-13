@@ -1,0 +1,1 @@
+$(".auth-grid").isotope({itemSelector:".auth-item",layoutMode:"packery",resize:!0,packery:{columnWidth:".auth-item",horizontal:!1},sortAscending:!0,transistion:300,percentPosition:!0}),$(".auth-clear-entry").click((function(t){$(".form-control").val("")}));
