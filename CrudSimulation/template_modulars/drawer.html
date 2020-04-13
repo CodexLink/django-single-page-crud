@@ -1,0 +1,43 @@
+{% load static %}
+{% if requireSideNav == True %}
+<div aria-hidden="true" class="navdrawer" id="navdrawer" tabindex="-1">
+  <div class="navdrawer-content">
+    <div class="sidebar-account container">
+      <img class="primary-user-pic"
+        src="{% if user.avatar %} {{ user.avatar.url }} {% else %} {% static 'misc/avatar.jpg' %} {% endif %}">
+      <div class="sidebar-primary-name-acc">
+        <h6 class="text-black-primary primary-name-acc" href="javascript:void(0)">{{user_current_name}}</h6>
+      </div>
+    </div>
+    <div class="navdrawer-divider special-type"></div>
+    <div class="navdrawer-subheader">Data</div>
+    <ul class="navdrawer-nav">
+      <li class="nav-item">
+        <a class="nav-link" href=""><i class="material-icons mr-3 text-black-secondary">dashboard</i>Data Viewer</a>
+      </li>
+    </ul>
+    <div class="navdrawer-divider"></div>
+    <div class="navdrawer-subheader">Functionalities</div>
+    <ul class="navdrawer-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'add_data_view' %}"><i class="material-icons mr-3 text-black-secondary">library_add</i>Add Data</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'delete_data_view' %}"><i class="material-icons mr-3 text-black-secondary">delete_forever</i>Delete
+          Data</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'update_data_view' %}"><i class="material-icons mr-3 text-black-secondary">update</i>Update / Modify
+          Data</a>
+      </li>
+      <div class="navdrawer-divider"></div>
+      <div class="navdrawer-subheader">Additional / Advanced</div>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'admin:index' %}"><i
+            class="material-icons mr-3 text-black-secondary">gavel</i>Admin Debug</a>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>
+{% endif %}

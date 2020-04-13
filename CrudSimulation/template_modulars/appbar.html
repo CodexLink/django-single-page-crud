@@ -1,0 +1,18 @@
+<header class="navbar navbar-dark navbar-full bg-primary fixed-top">
+    {% if requireSideNav == True %}
+    <button aria-expanded="false" aria-label="Toggle Navdrawer" class="navbar-toggler" data-target="#navdrawer"
+        data-toggle="navdrawer">
+        <span class="navbar-toggler-icon"></span></button>
+    {% endif %}
+    <span class="navbar-brand mr-auto">CRUD Speedrun | Summer Skilling #1</span>
+    {% if not hideLogoutButton %}
+    <a type="button" class="btn btn-link btn-icon-prepend text-white-primary" href="{% url 'deauth_user_view' %}"><i
+            class="material-icons text-white-secondary">power_settings_new</i>Logout</a>
+    {% endif %}
+</header>
+
+{% if requireSideNav == True %}
+{% include "drawer.html" with requireSideNav=True user_current_name=userNameContext %}
+{% else %}
+{% include "drawer.html" with requireSideNav=False %}
+{% endif %}

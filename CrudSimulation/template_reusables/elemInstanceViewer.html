@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include "header.html" %}
+</head>
+
+<!-- ! Content Starts Here -->
+{% if ClassInstance == "UserAuthView" %}
+<body class="log-backfill" style="background-image: url({% static 'misc/2ndLayerTriangleVector_ReEdited_Opacity.png' %})"></body>
+{% elif ClassInstance == "UserDeauthView" %}
+<body class="log-backfill" style="background-image: url({% static 'misc/2ndLayerTriangleVector_DarkMode_N100.png' %})"></body>
+{% else %}
+<body>
+{% endif %}
+    <!-- ! Multiple Instance Content Here -->
+    {% if ClassInstance == "DataView" %}
+        {% include "appbar.html" with requireSideNav=True userNameContext=user_instance_name %}
+        {% include "databoard.html" %}
+
+    {% elif ClassInstance == "DataAddition" %}
+        {% include "appbar.html" with requireSideNav=True userNameContext=user_instance_name %}
+        {% include "data_entry.html" with currentModifierMode="AddMode" %}
+
+    {% elif ClassInstance == "DataDeletion" %}
+        {% include "appbar.html" with requireSideNav=True userNameContext=user_instance_name %}
+        {% include "data_entry.html" with currentModifierMode="DeleteMode" %}
+
+    {% elif ClassInstance == "DataUpdate" %}
+        {% include "appbar.html" with requireSideNav=True userNameContext=user_instance_name %}
+        {% include "data_entry.html" with currentModifierMode="UpdateMode" %}
+
+    {% elif ClassInstance == "UserAuthView" %}
+        {% include "appbar.html" with hideLogoutButton=True %}
+        {% include "login.html" %}
+
+    {% elif ClassInstance == "UserDeauthView" %}
+        {% include "appbar.html" with hideLogoutButton=True %}
+        {% include "login.html" with isActionLogout=True %}
+
+    {% else %}
+        {% include "appbar.html" with hideLogoutButton=True %}
+        {% include "404.html" %}
+
+    {% endif %}
+
+    {% include "modals.html" %}
+    {% include "footer.html" %}
+</body>
+<!-- ! Content Ends Here -->
+
+</html>
