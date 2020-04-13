@@ -137,3 +137,6 @@ dmypy.json
 
 # ! Migrations
 migrations
+
+# User Data Folder(Literally Uploadable)
+userdata
