@@ -140,3 +140,23 @@ body.log-backfill {
 }
 
 /* ! Custom Pill CSS Rulesets - END */
+
+.btn-card-align {
+    padding: 0 15px !important;
+}
+
+
+/* ! Override Container Width on Large Scale Device */
+@media (min-width: 1200px) {
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl {
+        max-width: 1300px;
+    }
+}
+
+.remodify-botton-padding {
+    padding: 0 1.5rem 0 !important;
+}

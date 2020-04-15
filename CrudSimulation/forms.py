@@ -18,7 +18,7 @@ class AuthForm(AuthenticationForm, forms.ModelForm):
 # class UserTaskAdditionForm(forms.ModelForm):
 #     pass
 
-# class UserTaskDeletionForm(forms.ModelForm):
+# class UserTaskAllDeletionForm(forms.ModelForm):
 #     pass
 
 # class UserTaskUpdateForm(forms.ModelForm):

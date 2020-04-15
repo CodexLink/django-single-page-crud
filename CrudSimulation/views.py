@@ -9,11 +9,14 @@ from django.http import HttpResponseRedirect
 from requests.exceptions import RequestException
 from django.contrib import messages
 from django.contrib.auth import login, logout
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
 from .forms import *
 from .models import *
 
 template_RequiredEncapped = "elemInstanceViewer.html"
+template_RequiredNoContext = "noContextResponseOnly.html"
 
 class DataView(LoginRequiredMixin, TemplateView):
     login_url = reverse_lazy('auth_user_view')
@@ -22,7 +25,6 @@ class DataView(LoginRequiredMixin, TemplateView):
 
 
     more_context = {
-        "title_view": "Dashboard",
         "ClassInstance": str(__qualname__)
     }
 
@@ -33,6 +35,7 @@ class DataView(LoginRequiredMixin, TemplateView):
         view_context['user_branch'] = current_user.dept_residence
 
         view_context['ClassInstance'] = self.more_context['ClassInstance']
+        view_context['DataPayload'] = UserTasks.objects.filter(Task_Owner=current_user.uuid)
         return view_context
 
     def handle_no_permission(self):
@@ -86,6 +89,12 @@ class DataAddition(LoginRequiredMixin, TemplateView):
     login_url = reverse_lazy('auth_user_view')
     next_page = login_url
 
+    def dispatch(self, request):
+        if not request.user.is_authenticated:
+           messages.error(self.request, "UserNotLoggedIn")
+           print("UserNotLoggedIn")
+        return super(DataAddition, self).dispatch(request)
+
 
 class DataDeletion(LoginRequiredMixin, TemplateView):
     template_name = template_RequiredEncapped
@@ -93,9 +102,56 @@ class DataDeletion(LoginRequiredMixin, TemplateView):
     login_url = reverse_lazy('auth_user_view')
     next_page = login_url
 
+    def dispatch(self, request):
+        if not request.user.is_authenticated:
+           messages.error(self.request, "UserNotLoggedIn")
+           print("UserNotLoggedIn")
+        return super(DataDeletion, self).dispatch(request)
+
 
 class DataUpdate(LoginRequiredMixin, TemplateView):
     template_name = template_RequiredEncapped
 
     login_url = reverse_lazy('auth_user_view')
     next_page = login_url
+
+    def dispatch(self, request):
+        if not request.user.is_authenticated:
+           messages.error(self.request, "UserNotLoggedIn")
+           print("UserNotLoggedIn")
+        return super(DataUpdate, self).dispatch(request)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ExplicitActions(TemplateView):
+    Action = None
+    ItemUUID = None
+    template_name = template_RequiredNoContext
+
+    def dispatch(self, *args, **kwargs):
+        return super(ExplicitActions, self).dispatch(*args, **kwargs)
+
+    def get(self, *args, **kwargs):
+        if self.Action:
+            if self.Action == "ExportAll":
+                pass
+            elif "Delete" in self.Action:
+                try:
+                    if "All" in self.Action:
+                        UserTasks.objects.all().delete()
+                        messages.success(self.request, "DeletionSuccess")
+                    else:
+                        UserTasks.objects.filter(Task_UUID=self.kwargs['dataAttached']).delete()
+                        messages.success(self.request, "DeletionSuccess")
+
+                except:
+                    messages.error(self.request, "DeletionFailed")
+
+                finally:
+                    return HttpResponseRedirect(reverse('data_user_view'))
+
+            elif self.Action == "UpdateSpecific":
+                pass
+        else:
+            print("No other such candidate!")
+            messages.error(self.request, "")

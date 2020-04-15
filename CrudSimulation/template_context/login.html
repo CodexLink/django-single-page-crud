@@ -28,15 +28,13 @@
                     </div>
                 </div>
             </div>
-            {% elif message.message == "PermissionAccessDenied" %}
+            {% elif message.message == "PermissionAccessDenied" or message.message == "UserNotLoggedIn" %}
             <div class="auth-item col mb-auto">
-                <div class="card bg-info">
+                <div class="card bg-warning">
                     <div class="card-body text-white">
                         <h2 class="card-title text-white">Permission Access Denied!</h2>
-                        <h3 class="card-subtitle text-white">You're not obligated to check this area!</h3>
-                        <p class="card-text text-white">We suspect that you're not logged on. Please login an account
-                            with
-                            the right priviledges..</p>
+                        <h3 class="card-subtitle text-white">You're not obligated to access this area!</h3>
+                        <p class="card-text text-white">We suspect that you're not logged on. Please login an account that exists in the database.</p>
                     </div>
                 </div>
             </div>

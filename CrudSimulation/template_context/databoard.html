@@ -1,0 +1,149 @@
+{% load static %}
+<div class="container content-offset">
+    <div class="col auto mb-3">
+        <div class="card bg-danger">
+            <div class="card-header border-0 text-white-primary">
+                <h1 class="card-title">Attention!</h1>
+            </div>
+            <div class="card-body text-white">
+                <p>The Task DateTime Anti-Conflict/Collision Feature are NOT Implemented! The Date Time Deadline
+                    Detection is made by injecting current computer time in Website Context. And let the website loop
+                    through list to see if it is exceeds the date and time limit.
+                </p>
+            </div>
+        </div>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.message == "AuthenticationFailed" %}
+    <div class="col auto mb-2">
+        <div class="card bg-danger">
+            <div class="card-header border-0 text-white-primary">
+                <h1 class="card-title">Password Validation Failed!</h1>
+            </div>
+            <div class="card-body text-white">
+                <p>Sorry! I'm unable to proceed your actions. Your password credentials seems to be wrong. The data were
+                    still the same, by the way... Don't worry!
+                </p>
+            </div>
+        </div>
+    </div>
+    {% elif message.message == "InsertionFailed" %}
+    <div class="col auto mb-2">
+        <div class="card bg-warning">
+            <div class="card-header border-0 text-white-primary">
+                <h1 class="card-title">Data Insertion Failed!</h1>
+            </div>
+            <div class="card-body text-white">
+                <p>Sorry! I'm unable to process your data! There should be a conflict on the data that you want to
+                    insert in the database... Technical Information: (Add It Here)
+                </p>
+            </div>
+        </div>
+    </div>
+    {% elif message.message == "DeletionFailed" %}
+    <div class="col auto mb-2">
+        <div class="card bg-error">
+            <div class="card-header border-0 text-white-primary">
+                <h1 class="card-title">Data Deletion Failed!</h1>
+            </div>
+            <div class="card-body text-white">
+                <p>Sorry! I'm unable to delete your data! Please contact your administrator or the developer of this
+                    django project!
+                </p>
+            </div>
+        </div>
+    </div>
+    {% elif message.message == "DeletionSuccess" %}
+    <div class="col auto mb-2">
+        <div class="card bg-success">
+            <div class="card-header border-0 text-white-primary">
+                <h1 class="card-title">Data Deletion Success!</h1>
+            </div>
+            <div class="card-body text-white">
+                <p>Nice! I were able to delete the data you were requested.
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    <div class="row row-cols-lg-2 row-cols-md-1 row-cols-sm-1 dashboard-grid btn-card-align">
+        <div class="col auto mb-3">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#actionAddData" type="button">Add
+                Data</button>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#actionDeleteAllData" type="button">Delete
+                All Data</button>
+            <button class="btn btn-secondary" data-toggle="modal" data-target="#actionExportData" type="button">Export
+                Data to PDF</button>
+        </div>
+    </div>
+    <div class="col auto mb-3">
+        <div class="card">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Task Name</th>
+                        <th scope="col">Task Type</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Start Time</th>
+                        <th scope="col">End Time</th>
+                        <th scope="col">Created on</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if DataPayload %}
+                    {% for AllData in DataPayload %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ AllData.Task_Name }}</td>
+                        <td>{{ AllData.Task_Type }}</td>
+                        <td>{{ AllData.Task_Description }}</td>
+                        <td>{{ AllData.Task_StartTime }}</td>
+                        <td>{{ AllData.Task_EndTime }}</td>
+                        <td>{{ AllData.Task_CreateDate }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-icon" data-toggle="modal" data-target="#actionModifyData"
+                                type="button"><i class="material-icons">edit</i></button>
+                            <button class="btn btn-sm btn-icon data-{{ AllData.Task_UUID }}" type="button"
+                                data-toggle="modal" data-target="#actionDeleteSelectedData"
+                                data-task-id="{{ AllData.Task_UUID }}"><i
+                                    class="material-icons">delete_sweep</i></button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+            <hr class="my-0 w-100">
+            <div class="card-actions align-items-center justify-content-end">
+                <span class="align-self-center mb-1 mr-2 text-muted d-flex justify-content-between align-items-center"
+                    disabled>Table Pagination is not available as well!</span>
+                <span class="align-self-center mb-1 mx-1 text-muted">Rows per table display:</span>
+                <div class="dropdown">
+                    <button aria-expanded="false" aria-haspopup="true" class="btn btn-flat dropdown-toggle"
+                        data-toggle="dropdown" type="button" disabled>3</button>
+                    <div class="dropdown-menu dropdown-menu-right menu">
+                        <a class="dropdown-item active" href="#">3</a>
+                        <a class="dropdown-item" href="#">5</a>
+                        <a class="dropdown-item" href="#">10</a>
+                        <a class="dropdown-item" href="#">15</a>
+                        <a class="dropdown-item" href="#">20</a>
+                        <a class="dropdown-item" href="#">100</a>
+                        <a class="dropdown-item" href="#">* (Show All)</a>
+                    </div>
+                </div>
+                <span class="align-self-center mb-1 mr-2" disabled>1-{{ DataPayload.count }} of
+                    {{ DataPayload.count }}<span>
+                        <button class="btn btn-flat" href="#" disabled><i
+                                class="material-icons">chevron_left</i></button>
+                        <button class="btn btn-flat" href="#" disabled><i
+                                class="material-icons">chevron_right</i></button>
+            </div>
+        </div>
+    </div>
+</div>

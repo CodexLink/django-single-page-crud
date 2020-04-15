@@ -8,19 +8,19 @@ class UserDepartmentAttributes(admin.ModelAdmin):
     list_filter = ("Department_Name", "Department_SName", "Department_UUID")
     readonly_fields = ("Department_UUID", )
 
-class UserRolesAttributes(admin.ModelAdmin):
-    model = UserRoles
-    list_display = ("Role_Name", "Role_Description")
-    list_filter = ("Role_Name", "Role_Description")
+# class UserRolesAttributes(admin.ModelAdmin):
+#     model = UserRoles
+#     list_display = ("Role_Name", "Role_Description")
+#     list_filter = ("Role_Name", "Role_Description")
 
 class UserCredentialsAttributes(UserAdmin):
     model = UserCredentials
-    list_display = ("username", "first_name", "middle_name", "role", "dept_residence", 'is_active' ,'is_staff', 'is_superuser', 'date_joined')
-    list_filter = ("username", "first_name", "middle_name", "role", "dept_residence", 'is_active' ,'is_staff', 'is_superuser', 'date_joined')
+    list_display = ("username", "first_name", "middle_name", "last_name", "dept_residence", 'is_active' ,'is_staff', 'is_superuser', 'date_joined', "uuid")
+    list_filter = ("username", "first_name", "middle_name", "last_name", "dept_residence", 'is_active' ,'is_staff', 'is_superuser', 'date_joined', "uuid")
     readonly_fields = ("uuid", )
     fieldsets =  (
         ('User Credentials', {
-            'fields': ('username', 'password', 'role', 'dept_residence'),
+            'fields': ('username', 'password', 'dept_residence'),
             }
         ),
         ('User Information', {
@@ -42,7 +42,7 @@ class UserCredentialsAttributes(UserAdmin):
     )
     add_fieldsets = (
         ('User Credentials', {
-            'fields': ('username', 'password1', 'password2', 'role', 'dept_residence'),
+            'fields': ('username', 'password1', 'password2', 'dept_residence'),
             }
         ),
         ('User Information', {
@@ -61,10 +61,10 @@ class UserCredentialsAttributes(UserAdmin):
 
 class UserTasksAttributes(admin.ModelAdmin):
     model = UserTasks
-    list_display = ("Task_Name", "Task_Description", "Task_Type")
-    list_filter = ("Task_Name", "Task_Description", "Task_Type")
+    list_display = ("Task_Name", "Task_Description", "Task_Type", "Task_StartTime", "Task_EndTime", "Task_CreateDate", "Task_UUID")
+    list_filter = ("Task_Name", "Task_Description", "Task_Type", "Task_StartTime", "Task_EndTime", "Task_CreateDate", "Task_UUID")
 
 admin.site.register(UserDepartment, UserDepartmentAttributes)
-admin.site.register(UserRoles, UserRolesAttributes)
+# admin.site.register(UserRoles, UserRolesAttributes)
 admin.site.register(UserCredentials, UserCredentialsAttributes)
 admin.site.register(UserTasks, UserTasksAttributes)
