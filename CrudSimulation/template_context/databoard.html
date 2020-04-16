@@ -96,8 +96,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% if DataPayload %}
-                    {% for AllData in DataPayload %}
+                    {% if DataSets %}
+                    {% for AllData in DataSets %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
                         <td>{{ AllData.Task_Name }}</td>
@@ -109,8 +109,8 @@
                         <td>
                             <button class="btn btn-sm btn-icon" data-toggle="modal" data-target="#actionModifyData"
                                 type="button"><i class="material-icons">edit</i></button>
-                            <button class="btn btn-sm btn-icon data-{{ AllData.Task_UUID }}" type="button"
-                                data-toggle="modal" data-target="#actionDeleteSelectedData"
+                            <button class="btn btn-sm btn-icon" type="button"
+                                data-toggle="modal" data-task-name="{{ AllData.Task_Name }}" data-target="#actionDeleteSelectedData"
                                 data-task-id="{{ AllData.Task_UUID }}"><i
                                     class="material-icons">delete_sweep</i></button>
                         </td>

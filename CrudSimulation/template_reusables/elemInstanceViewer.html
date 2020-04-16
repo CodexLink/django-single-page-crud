@@ -39,6 +39,10 @@
         {% include "appbar.html" with hideLogoutButton=True %}
         {% include "login.html" with isActionLogout=True %}
 
+    {% elif ClassInstance == "UserRegistrationView" %}
+        {% include "appbar.html" with hideLogoutButton=True %}
+        {% include "registration.html" %}
+
     {% else %}
         {% include "appbar.html" with hideLogoutButton=True %}
         {% include "404.html" %}

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Add Data</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Add Task Data</h5>
             </div>
             <div class="modal-body remodify-botton-padding">
                 <div class="mb-3">
@@ -10,53 +10,52 @@
                     feel you forgot something. Look, just fill the form and you can manage things later. Okay?
                 </div>
 
-                <form enctype="multipart/form-data" autocomplete="on">
+                <form enctype="multipart/form-data" method="POST" action="{% url 'implicit_add_data_view' %}" autocomplete="on">
+                    {% csrf_token %}
                     <div class="form-row mb-3">
                         <div class="col">
                             <div class="floating-label textfield-box">
                                 <label for="exampleFloatingBox1">Task Name</label>
-                                <input type="text" class="form-control" placeholder="Literally Task Name">
+                                {{ AddData_Form.Task_Name }}
                             </div>
                         </div>
                         <div class="col">
-                            <div class="floating-label textfield-box">
+                            <div class="floating-label textfield-box has-value">
                                 <label for="exampleFloatingBox1">Task Type</label>
-                                <input type="text" class="form-control" placeholder="Literally Task Types">
+                                {{ AddData_Form.Task_Type }}
                             </div>
                         </div>
-
                     </div>
                     <div class="form-group mb-3">
                         <div class="floating-label textfield-box">
                             <label for="exampleFloatingBox1">Task Description</label>
-                            <textarea type="text" class="form-control" id="exampleFloatingBox1"
-                                placeholder="Required for Clarified Intention!"></textarea>
+                                {{ AddData_Form.Task_Description }}
                         </div>
                     </div>
                     <div class="form-row mb-3">
                         <div class="col mb-3">
                             <div class="floating-label textfield-box">
                                 <label for="exampleFloatingLabel2">Start DateTime</label>
-                                <input aria-describedby="dateTimeStart" class="form-control" id="dateTimeStart" placeholder="Start DateTime" type="datetime-local">
+                                {{ AddData_Form.Task_StartTime }}
                             </div>
                         </div>
                         <div class="col">
                             <div class="floating-label textfield-box">
                                 <label for="exampleFloatingLabel2">End DateTime</label>
-                                <input aria-describedby="dateTimeEnd" class="form-control" id="dateTimeEnd" placeholder="nd DateTime" type="datetime-local">
+                                {{ AddData_Form.Task_EndTime }}
                             </div>
                         </div>
-
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button name="action" value="addForm" type="submit" class="btn btn-primary">Add
+                            Data</button>
+                    </div>
                 </form>
 
             </div>
-            <div class="modal-footer">
-                <a type="button" class="btn btn-danger" data-dismiss="modal">Cancel</a>
-                <a type="submit" class="btn btn-primary" href="{% url 'implicit_add_data_view' %}">Add Data</a>
-            </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 
@@ -64,60 +63,59 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Modify Data</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Modify Task Data</h5>
             </div>
             <div class="modal-body remodify-botton-padding">
                 <div class="mb-3">
-                    Replace any data that you want to replace at. All fields are required by the way. So you shouldn't be leaving those blanks. Okay?
+                    Replace any data that you want to replace at. All fields are required by the way. So you shouldn't
+                    be leaving those blanks. Okay?
                 </div>
 
-                <form enctype="multipart/form-data" autocomplete="on">
+                <form enctype="multipart/form-data" method="POST" autocomplete="on">
                     <div class="form-row mb-3">
                         <div class="col">
                             <div class="floating-label textfield-box">
                                 <label for="exampleFloatingBox1">Task Name</label>
-                                <input type="text" class="form-control" placeholder="Literally Task Name">
+                                {{ forms.updateForm.Task_Name }}
                             </div>
                         </div>
                         <div class="col">
-                            <div class="floating-label textfield-box">
+                            <div class="floating-label textfield-box has-value">
                                 <label for="exampleFloatingBox1">Task Type</label>
-                                <input type="text" class="form-control" placeholder="Literally Task Types">
+                                {{ forms.updateForm.Task_Type }}
                             </div>
                         </div>
-
                     </div>
                     <div class="form-group mb-3">
                         <div class="floating-label textfield-box">
                             <label for="exampleFloatingBox1">Task Description</label>
-                            <textarea type="text" class="form-control" id="exampleFloatingBox1"
-                                placeholder="Required for Clarified Intention!"></textarea>
+                            {{ forms.updateForm.Task_Description }}
                         </div>
                     </div>
                     <div class="form-row mb-3">
                         <div class="col mb-3">
                             <div class="floating-label textfield-box">
                                 <label for="exampleFloatingLabel2">Start DateTime</label>
-                                <input aria-describedby="dateTimeStart" class="form-control" id="dateTimeStart" placeholder="Start DateTime" type="datetime-local">
+                                {{ forms.updateForm.Task_StartTime }}
                             </div>
                         </div>
                         <div class="col">
                             <div class="floating-label textfield-box">
                                 <label for="exampleFloatingLabel2">End DateTime</label>
-                                <input aria-describedby="dateTimeEnd" class="form-control" id="dateTimeEnd" placeholder="nd DateTime" type="datetime-local">
+                                {{ forms.updateForm.Task_EndTime }}
                             </div>
                         </div>
-
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button name="action" type="submit" value="updateForm" class="btn btn-primary">Update Selected
+                            Data</button>
+                    </div>
                 </form>
 
             </div>
-            <div class="modal-footer">
-                <A type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</A>
-                <A type="submit" class="btn btn-primary">Update Selected Data</A>
-            </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 
@@ -125,15 +123,24 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Deleting Selected Data</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Deleting All Existing Task Data</h5>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete the data? This action renders the data unrecoverable! Please do this
+                <!-- <div class="mb-3"> -->
+                Are you sure you want to delete all data? This action renders the data unrecoverable! Please do this
                 with caution!!!
+                <!-- </div> -->
+                <!-- <div class="form-group">
+                    <div class="floating-label textfield-box">
+                        <label for="requestAuthentication">Password Authentication</label>
+                        {{ forms.authenticationForm.password }}
+                    </div>
+                </div> -->
             </div>
             <div class="modal-footer">
                 <a type="button" class="btn btn-primary" data-dismiss="modal">Cancel</a>
-                <a type="submit" class="btn btn-danger" href="{% url 'explicit_delete_all_view' %}">Confirm Delete Action</a>
+                <a type="submit" class="btn btn-danger" href="{% url 'explicit_delete_all_view' %}">Confirm Delete
+                    Action</a>
             </div>
         </div>
     </div>
@@ -143,11 +150,10 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Deleting Selected Data</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Deleting Selected Task Data</h5>
             </div>
-            <div class="modal-body">
-                Are you sure you want to delete the data? This action renders the data unrecoverable! Please do this
-                with caution!!!
+            <div class="modal-body dynamic-content-task-warn">
+
             </div>
             <div class="modal-footer">
                 <a type="button" class="btn btn-primary" data-dismiss="modal">Cancel</a>
@@ -161,25 +167,25 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Exporting All Data to PDF</h5>
+                <h5 class="modal-title" id="exampleModalCenterTitle">Exporting All Task Data to PDF</h5>
             </div>
             <div class="modal-body">
-                <div class="mb-3">
-                    This actions renders all your tasks in PDF Form.
+                <!-- <div class="mb-3"> -->
+                This actions renders all your tasks in PDF Form.
 
-                    Complete the required fields below to continue! This was intended because you have the ability to
-                    expose a potentially undisclosed data from annonymous people who can find the PDF data.
-                </div>
+                Complete the required fields below to continue! This was intended because you have the ability to
+                expose a potentially undisclosed data from annonymous people who can find the PDF data.
+                <!-- </div> -->
 
-                <form enctype="multipart/form-data" autocomplete="off">
+                <!-- <form enctype="multipart/form-data" method="POST" autocomplete="off">
+                    {% csrf_token %}
                     <div class="form-group">
                         <div class="floating-label textfield-box">
-                            <label for="exampleFloatingBox1">Password Authentication</label>
-                            <input class="form-control" id="exampleFloatingBox1"
-                                placeholder="Required Parameter to Proceed..." type="password">
+                            <label for="requestAuthentication">Password Authentication</label>
+                            {{ forms.authenticationForm.password }}
                         </div>
                     </div>
-                </form>
+                </form> -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>

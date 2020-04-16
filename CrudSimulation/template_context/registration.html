@@ -1,0 +1,111 @@
+<div class="container content-offset">
+    {% if form.non_field_errors %}
+            <div class="auth-item col mb-auto">
+                <div class="card bg-danger">
+                    <div class="card-body text-white">
+                        <h2 class="card-title text-white">Validation Error!</h2>
+                        <h3 class="card-subtitle text-white">There's something wrong.</h3>
+                        <p class="card-text text-white">You put something that is mismatched! Check the information further on the bullet note here.
+                            Please try again.
+                        </p>
+                        <ul>
+                            {{ form.errors }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+    <div class="card">
+        <div class="card-header border-0">
+            <h2 class="card-title">Registration Form For Simple Task Management System</h2>
+            <h3 class="card-subtitle text-black-secondary">You want to be our member of this web-app? Sign in! Just fill some information below.</h3>
+        </div>
+        <div class="card-body">
+            <form enctype="multipart/form-data" method="POST" autocomplete="on">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group textfield-box">
+                            <label for="validationFirstName">First Name</label>
+                            {{ form.first_name }}
+                            <span class="bmd-help">We need to know who's the owner.</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group textfield-box">
+                            <label for="validationMiddleName">Middle Name</label>
+                            {{ form.middle_name }}
+                            <span class="bmd-help">Put nothing, if you/they don't have one.</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group textfield-box">
+                            <label for="validationLastName">Last Name</label>
+                            {{ form.last_name }}
+                            <span class="bmd-help">Required for Data.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group textfield-box">
+                            <label for="validationUserEmail">E-mail Address</label>
+                            {{ form.email }}
+                            <span class="bmd-help">We need to know other ways to contact you in case of any kind of occurence in our website.</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group textfield-box">
+                            <label for="validationUserDept">Department Residence</label>
+                            {{ form.dept_residence }}
+                            <span class="bmd-help">We need to know what part of department are you in.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group textfield-box">
+                            <label for="validationUsername">Username</label>
+                            {{ form.username }}
+                            <span class="bmd-help">We need to know you uniquely by providing the username that you'll use later.</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group textfield-box">
+                            <label for="validationAvatar">User Avatar</label>
+                            {{ form.avatar }}
+                            <span class="bmd-help">Put nothing, if you don't have one.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group textfield-box">
+                            <label for="validationPassword">Password</label>
+                            {{ form.password }}
+                            <span class="bmd-help">Enter your password.</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group textfield-box">
+                            <label for="validationConfirmPassword">Confirm Password</label>
+                            {{ form.confirm_password }}
+                            <span class="bmd-help">Re-enter again just in case you forgot the password you just entered.</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-button-table float-right">
+                    <button type="button" class="btn btn-flat-secondary clear-trigger-modal" data-dismiss="modal">Clear
+                        All Entries</button> <!-- Launch the modal for notification here.-->
+                    <button class="btn btn-flat-primary" id="data-modal-submit" type="submit">Submit
+                        Application</button>
+                </div>
+        </div>
+        </form>
+    </div>
+</div>

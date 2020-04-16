@@ -38,6 +38,16 @@
                     </div>
                 </div>
             </div>
+            {% elif message.message == "RegisterSuccess" %}
+            <div class="auth-item col mb-auto">
+                <div class="card bg-success">
+                    <div class="card-body text-white">
+                        <h2 class="card-title text-white">Registration Success!</h2>
+                        <h3 class="card-subtitle text-white">Your account was successfully created!</h3>
+                        <p class="card-text text-white">Now you can use the website features.</p>
+                    </div>
+                </div>
+            </div>
             {% endif %}
             {% endfor %}
             {% endif %}
@@ -76,7 +86,7 @@
                             </div>
                             <div class="card-actions">
                                 <button class="btn btn-flat-primary" type="submit">Login User</button>
-                                <button class="btn btn-flat-secondary" type="button">Register User</button>
+                                <a class="btn btn-flat-secondary" href="{% url 'new_user_view' %}">Register User</a>
                                 <button type="button" class="btn btn-flat-danger auth-clear-entry">Clear Credentials</button>
                             </div>
                         </form>
