@@ -54,8 +54,8 @@ class UserTasks(models.Model):
         db_table = "user_tasks"
 
     Task_Owner = models.ForeignKey(UserCredentials, to_field="uuid", null=False, blank=False, verbose_name="Task Owner", help_text="Unique Identifier for whom which tasks is assigned to.", on_delete=models.CASCADE)
-    Task_Name = models.CharField(max_length=32, null=False, blank=False, verbose_name="Task Name", help_text="Unique Identifier for Task Assigned To Users.")
-    Task_Description = models.CharField(max_length=256, null=False, blank=False, verbose_name="Task Description", help_text="Literally Task Description. Required. You have to point out what's the point of the task given to you.")
+    Task_Name = models.CharField(max_length=150, null=False, blank=False, verbose_name="Task Name", help_text="Unique Identifier for Task Assigned To Users.")
+    Task_Description = models.CharField(max_length=512, null=False, blank=False, verbose_name="Task Description", help_text="Literally Task Description. Required. You have to point out what's the point of the task given to you.")
     Task_Type = models.CharField(max_length=16, null=False, blank=False, verbose_name="Task Type", choices=TaskTypes, default=TaskTypes[0][0], help_text="Literally A Task Type. This could help users how important the task is.")
     Task_StartTime = models.DateTimeField(verbose_name='Task Start Time', help_text='Refers to a time start of the task.', null=True, blank=True)
     Task_EndTime = models.DateTimeField(verbose_name='Task End Time', help_text='Refers to a time end of the task.', null=True, blank=True)

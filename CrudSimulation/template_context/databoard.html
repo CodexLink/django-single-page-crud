@@ -91,24 +91,24 @@
                         <th scope="col">Description</th>
                         <th scope="col">Start Time</th>
                         <th scope="col">End Time</th>
-                        <th scope="col">Created on</th>
+                        <th scope="col">Created / Modified on</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% if DataSets %}
                     {% for AllData in DataSets %}
-                    <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ AllData.Task_Name }}</td>
-                        <td>{{ AllData.Task_Type }}</td>
-                        <td>{{ AllData.Task_Description }}</td>
-                        <td>{{ AllData.Task_StartTime }}</td>
-                        <td>{{ AllData.Task_EndTime }}</td>
-                        <td>{{ AllData.Task_CreateDate }}</td>
+                    <tr class="{{ AllData.Task_UUID }}">
+                        <th scope="row-{{ forloop.counter }}">{{ forloop.counter }}</th>
+                        <td id="taskName">{{ AllData.Task_Name }}</td>
+                        <td id="taskType">{{ AllData.Task_Type }}</td>
+                        <td id="taskDescription">{{ AllData.Task_Description }}</td>
+                        <td id="taskStartTime">{{ AllData.Task_StartTime|date:'M d, Y, g:i a' }}</td>
+                        <td id="taskEndTime">{{ AllData.Task_EndTime|date:'M d, Y, g:i a' }}</td>
+                        <td id="taskCreateTime">{{ AllData.Task_CreateDate }}</td>
                         <td>
                             <button class="btn btn-sm btn-icon" data-toggle="modal" data-target="#actionModifyData"
-                                type="button"><i class="material-icons">edit</i></button>
+                                type="button" data-task-id="{{ AllData.Task_UUID }}"><i class="material-icons">edit</i></button>
                             <button class="btn btn-sm btn-icon" type="button"
                                 data-toggle="modal" data-task-name="{{ AllData.Task_Name }}" data-target="#actionDeleteSelectedData"
                                 data-task-id="{{ AllData.Task_UUID }}"><i

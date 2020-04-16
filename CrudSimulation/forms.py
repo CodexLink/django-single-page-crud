@@ -16,11 +16,12 @@ class UserTaskAdditionForm(forms.ModelForm):
         model = UserTasks
         fields = '__all__'
         exclude = ['Task_UUID', 'Task_CreateDate', 'Task_Owner']
-    Task_Name = forms.CharField(min_length=2, max_length=150, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'validationUsername', 'placeholder': 'Required'}))
-    Task_Description = forms.CharField(min_length=2, max_length=50, required=True, widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Required'}))
-    Task_Type = forms.ChoiceField(choices=TaskTypes, required=True, widget=forms.Select(attrs={'class': 'form-control', 'placeholder': 'Required'}))
-    Task_StartTime = forms.DateTimeField(input_formats=['%Y-%m-%dT%H:%M'], required=True, widget=forms.DateTimeInput(attrs={'class': 'form-control', 'id':'dateTimeEnd', 'placeholder': 'End DateTime', 'type': 'datetime-local', 'min': '2020/04/01T000:00', 'max': '2099/12/31T000:00' }))
-    Task_EndTime = forms.DateTimeField(input_formats=['%Y-%m-%dT%H:%M'], required=True, widget=forms.DateTimeInput(attrs={'class': 'form-control', 'id':'dateTimeEnd', 'placeholder': 'End DateTime', 'type': 'datetime-local', 'min': '2020/04/01T000:00', 'max': '2099/12/31T000:00' }))
+
+    Task_Name = forms.CharField(min_length=2, max_length=150, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'addDataTaskName', 'placeholder': 'Required'}))
+    Task_Description = forms.CharField(min_length=2, max_length=512, required=True, widget=forms.Textarea(attrs={'class': 'form-control', 'id':'addTaskDescription', 'placeholder': 'Required'}))
+    Task_Type = forms.ChoiceField(choices=TaskTypes, required=True, widget=forms.Select(attrs={'class': 'form-control', 'id':'addDataTaskType', 'placeholder': 'Required'}))
+    Task_StartTime = forms.DateTimeField(input_formats=['%Y-%m-%dT%H:%M'], required=True, widget=forms.DateTimeInput(attrs={'class': 'form-control', 'id':'addTaskStartTime', 'placeholder': 'Start DateTime', 'type': 'datetime-local', 'min': '2020/04/01T000:00', 'max': '2099/12/31T000:00' }))
+    Task_EndTime = forms.DateTimeField(input_formats=['%Y-%m-%dT%H:%M'], required=True, widget=forms.DateTimeInput(attrs={'class': 'form-control', 'id':'addTaskEndTime', 'placeholder': 'End DateTime', 'type': 'datetime-local', 'min': '2020/04/01T000:00', 'max': '2099/12/31T000:00' }))
 
 
 class UserTaskUpdateForm(forms.ModelForm):
@@ -28,28 +29,15 @@ class UserTaskUpdateForm(forms.ModelForm):
         model = UserTasks
         fields = '__all__'
         exclude = ['Task_UUID', 'Task_CreateDate', 'Task_Owner']
-    Task_Name = forms.CharField(min_length=2, max_length=150, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'validationUsername', 'placeholder': 'Required'}))
-    Task_Description = forms.CharField(min_length=2, max_length=50, required=True, widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Required'}))
-    Task_Type = forms.ChoiceField(choices=TaskTypes, required=True, widget=forms.Select(attrs={'class': 'form-control', 'placeholder': 'Required'}))
-    Task_StartTime = forms.DateTimeField(input_formats=['%Y-%m-%dT%H:%M'], required=True, widget=forms.DateTimeInput(attrs={'class': 'form-control', 'id':'dateTimeEnd', 'placeholder': 'End DateTime', 'type': 'datetime-local', 'min': '2020/04/01T000:00', 'max': "2099/12/31T000:00" }))
-    Task_EndTime = forms.DateTimeField(input_formats=['%Y-%m-%dT%H:%M'], required=True, widget=forms.DateTimeInput(attrs={'class': 'form-control', 'id':'dateTimeEnd', 'placeholder': 'End DateTime', 'type': 'datetime-local', 'min': '2020/04/01T000:00', 'max': "2099/12/31T000:00" }))
 
+    Task_Name = forms.CharField(min_length=2, max_length=150, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'modifyDataTaskName', 'placeholder': 'Required'}))
+    Task_Description = forms.CharField(min_length=2, max_length=512, required=True, widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'modifyTaskDescription', 'placeholder': 'Required'}))
+    Task_Type = forms.ChoiceField(choices=TaskTypes, required=True, widget=forms.Select(attrs={'class': 'form-control', 'id': 'modifyDataTaskType', 'placeholder': 'Required'}))
+    Task_StartTime = forms.DateTimeField(input_formats=['%Y-%m-%dT%H:%M'], required=True, widget=forms.DateTimeInput(attrs={'class': 'form-control', 'id':'modifyTaskStartTime', 'placeholder': 'Start DateTime', 'type': 'datetime-local', 'min': '2020/04/01T000:00', 'max': "2099/12/31T000:00" }))
+    Task_EndTime = forms.DateTimeField(input_formats=['%Y-%m-%dT%H:%M'], required=True, widget=forms.DateTimeInput(attrs={'class': 'form-control', 'id':'modifyTaskEndTime', 'placeholder': 'End DateTime', 'type': 'datetime-local', 'min': '2020/04/01T000:00', 'max': "2099/12/31T000:00" }))
 
-# class UserOnSiteAuthentication(forms.ModelForm):
-#     class Meta:
-#         model = UserCredentials
-#         fields = ['password']
-#     password = forms.CharField(max_length=64, min_length=4, widget=forms.PasswordInput(attrs={'class': 'form-control', 'type':'password', 'id': 'requestAuthentication', 'placeholder':'Required Parameter to Proceed...'}))
-
-#     def clean(self, *args, **kwargs):
-#         print("CleanedSiteAuthentication")
-#         cleaned_data = super(UserOnSiteAuthentication, self).clean()
-#         password = cleaned_data.get("password")
-#         if UserCredentials.objects.filter(password=password).count():
-#             return cleaned_data
-#         else:
-#             print("ProcessNotAllowed")
-#             raise forms.ValidationError("Your Password and Password Confirmation Field does not match!")
+    def clean(self):
+        return super(UserTaskUpdateForm, self).clean()
 
 
 class RegistrationForm(forms.ModelForm):
@@ -65,6 +53,7 @@ class RegistrationForm(forms.ModelForm):
             'password',
             'avatar'
             ]
+
     username = forms.CharField(min_length=2, max_length=150, required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'validationUsername', 'placeholder': 'Required'}))
     password = forms.CharField(min_length=2, max_length=128, required=True, widget=forms.PasswordInput(attrs={'type': 'password', 'class': 'form-control', 'id': 'validationPassword', 'placeholder': 'Required'}))
     confirm_password = forms.CharField(min_length=2, max_length=128, required=True, widget=forms.PasswordInput(attrs={'type': 'password', 'class': 'form-control', 'id': 'validationPassword', 'placeholder': 'Required'}))

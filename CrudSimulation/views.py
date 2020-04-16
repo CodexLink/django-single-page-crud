@@ -15,24 +15,16 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from .forms import *
 from .models import *
-from .additionals.multiFormClass import MultiFormsView
 
 template_RequiredEncapped = "elemInstanceViewer.html"
 template_RequiredNoContext = "noContextResponseOnly.html"
 
-
 # ! Source Solution for Two Forms at the same time
-# - https://stackoverflow.com/a/15499249/5353223
+# - https://krzysztofzuraw.com/blog/2016/two-forms-one-view-django.html
 
 class DataView(LoginRequiredMixin, TemplateView):
     success_url = reverse_lazy('data_user_view')
     template_name = template_RequiredEncapped
-
-    # form_focused = None
-    # form_classes = {
-    # "addForm": UserTaskAdditionForm,
-    # "updateForm": UserTaskUpdateForm,
-    # }
 
     redirect_field_name = reverse_lazy('deauth_user_view')
     model = UserTasks
@@ -40,15 +32,6 @@ class DataView(LoginRequiredMixin, TemplateView):
     more_context = {
         "ClassInstance": str(__qualname__)
     }
-
-    # def get_context_data(self, *args, **kwargs):
-    #     current_user = self.request.user
-    #     view_context = super(DataView, self).get_context_data(**kwargs)
-    #     view_context['user_instance_name'] = '%s %s %s' % (current_user.first_name, current_user.middle_name if current_user.middle_name is not None else '', current_user.last_name)
-    #     view_context['ClassInstance'] = self.more_context['ClassInstance']
-    #     view_context['DataSets'] = UserTasks.objects.filter(Task_Owner=self.request.user.uuid)
-
-    #     return view_context
 
     def get(self, *args, **kwargs):
         current_user = self.request.user
@@ -61,49 +44,6 @@ class DataView(LoginRequiredMixin, TemplateView):
         form_context["UpdateData_Form"] = UserTaskUpdateForm(self.request.GET)
 
         return self.render_to_response(form_context)
-
-    # def get_login_initial(self):
-    #     return {'email':'dave@dave.com'}
-
-    # def get_addForm_initial(self):
-    #     return {'email':'dave@dave.com'}
-
-    # # def login_form_valid(self, form):
-    # #     return form.login(self.request, redirect_url=self.get_success_url())
-
-    # def addForm_form_invalid(self, form):
-    #     print(self.request)
-    #     print("AddForm: Validated")
-    #     user = form.save(self.request)
-    #     return self.get_success_url()
-
-    # def addForm_form_valid(self, form):
-    #     print(self.request)
-    #     print("AddForm: Validated")
-    #     user = form.save(self.request)
-    #     return self.get_success_url()
-
-    # def post(self, request, *args, **kwargs):
-    #     self.object = {}
-
-    #     if 'addForm' in self.request.POST:
-    #         form_focused = self.get_form_class()
-    #         form_name = 'form'
-    #     elif 'updateForm' in self.request.POST:
-    #         form_focused = self.updateForm
-    #         form_name = 'form'
-
-    #     else:
-    #         form_focused = self.deleteForm
-    #         form_name = 'deleteForm'
-
-    #     form = self.get_form(form_focused)
-
-    #     if form.is_valid():
-    #         return self.form_valid(form)
-    #     else:
-    #         return self.form_invalid(**{form_name: form})
-
 
     def handle_no_permission(self):
         self.raise_exception = self.request.user.is_authenticated
@@ -133,9 +73,7 @@ class UserAuthView(LoginView):
         return self.success_url
 
 class UserDeauthView(LoginRequiredMixin, LogoutView):
-
     template_name = template_RequiredEncapped
-
     login_url = reverse_lazy('auth_user_view')
     next_page = login_url
 
@@ -183,12 +121,9 @@ class DataDeletion(LoginRequiredMixin, CreateView):
            print("UserNotLoggedIn")
         return super(DataDeletion, self).dispatch(request)
 
-
 class DataUpdate(LoginRequiredMixin, FormView):
-    template_name = template_RequiredNoContext
+    template_name = template_RequiredEncapped
     success_url = reverse_lazy('data_user_view')
-    form_class = UserTasks
-
 
     def dispatch(self, request):
         if not request.user.is_authenticated:
@@ -197,26 +132,27 @@ class DataUpdate(LoginRequiredMixin, FormView):
         return super(DataUpdate, self).dispatch(request)
 
     def post(self, request, *args, **kwargs):
-        print(request.POST)
-        targetFormData = self.form_class(request.POST)
-
+        targetFormData = UserTaskUpdateForm(request.POST)
+        import os
+        os.system("CLS")
         if targetFormData.is_valid():
-            targetFormData.save()
+            print(request.POST)
+            print("Updating")
+            self.object = UserTasks.objects.filter(Task_Owner__uuid=self.request.user.uuid, Task_UUID=request.POST["TaskReferenceID"]).update(Task_Name=request.POST['Task_Name'], Task_Type=request.POST['Task_Type'], Task_Description=request.POST['Task_Description'], Task_StartTime=request.POST['Task_StartTime'], Task_EndTime=request.POST['Task_EndTime'])
             messages.success(self.request, "NewDataSavedSuccessfully")
         else:
-            messages.success(self.request, "NewDataSavingField")
+            print(request.POST)
+            print("Not valid")
+            print(targetFormData.errors)
+            messages.error(self.request, "NewDataNotSaving")
 
-        return self.render_to_response(self.get_context_data)
+        return redirect(self.success_url)
 
 
-@method_decorator(csrf_exempt, name='dispatch')
 class ExplicitActions(TemplateView):
     Action = None
     ItemUUID = None
-    template_name = template_RequiredNoContext
-
-    def dispatch(self, *args, **kwargs):
-        return super(ExplicitActions, self).dispatch(*args, **kwargs)
+    template_name = template_RequiredEncapped
 
     def get(self, *args, **kwargs):
         if self.Action:
@@ -237,8 +173,6 @@ class ExplicitActions(TemplateView):
                 finally:
                     return HttpResponseRedirect(reverse('data_user_view'))
 
-            elif self.Action == "UpdateSpecific":
-                pass
         else:
             print("No other such candidate!")
             messages.error(self.request, "")

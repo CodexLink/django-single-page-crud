@@ -10,38 +10,39 @@
                     feel you forgot something. Look, just fill the form and you can manage things later. Okay?
                 </div>
 
-                <form enctype="multipart/form-data" method="POST" action="{% url 'implicit_add_data_view' %}" autocomplete="on">
+                <form enctype="multipart/form-data" method="POST" action="{% url 'implicit_add_data_view' %}"
+                    autocomplete="on">
                     {% csrf_token %}
                     <div class="form-row mb-3">
                         <div class="col">
                             <div class="floating-label textfield-box">
-                                <label for="exampleFloatingBox1">Task Name</label>
+                                <label for="addDataTaskName">Task Name</label>
                                 {{ AddData_Form.Task_Name }}
                             </div>
                         </div>
                         <div class="col">
                             <div class="floating-label textfield-box has-value">
-                                <label for="exampleFloatingBox1">Task Type</label>
+                                <label for="addDataTaskType">Task Type</label>
                                 {{ AddData_Form.Task_Type }}
                             </div>
                         </div>
                     </div>
                     <div class="form-group mb-3">
                         <div class="floating-label textfield-box">
-                            <label for="exampleFloatingBox1">Task Description</label>
-                                {{ AddData_Form.Task_Description }}
+                            <label for="addTaskDescription">Task Description</label>
+                            {{ AddData_Form.Task_Description }}
                         </div>
                     </div>
                     <div class="form-row mb-3">
                         <div class="col mb-3">
                             <div class="floating-label textfield-box">
-                                <label for="exampleFloatingLabel2">Start DateTime</label>
+                                <label for="addTaskStartTime">Start DateTime</label>
                                 {{ AddData_Form.Task_StartTime }}
                             </div>
                         </div>
                         <div class="col">
                             <div class="floating-label textfield-box">
-                                <label for="exampleFloatingLabel2">End DateTime</label>
+                                <label for="addTaskEndTime">End DateTime</label>
                                 {{ AddData_Form.Task_EndTime }}
                             </div>
                         </div>
@@ -71,48 +72,49 @@
                     be leaving those blanks. Okay?
                 </div>
 
-                <form enctype="multipart/form-data" method="POST" autocomplete="on">
+                <form enctype="multipart/form-data" method="POST" action="{% url 'implicit_update_specific_view' %}" autocomplete="on">
+                    {% csrf_token %}
                     <div class="form-row mb-3">
                         <div class="col">
-                            <div class="floating-label textfield-box">
-                                <label for="exampleFloatingBox1">Task Name</label>
-                                {{ forms.updateForm.Task_Name }}
+                            <div class="floating-label textfield-box has-value">
+                                <label for="modifyDataTaskName">Task Name</label>
+                                {{ UpdateData_Form.Task_Name }}
                             </div>
                         </div>
                         <div class="col">
                             <div class="floating-label textfield-box has-value">
-                                <label for="exampleFloatingBox1">Task Type</label>
-                                {{ forms.updateForm.Task_Type }}
+                                <label for="modifyDataTaskType">Task Type</label>
+                                {{ UpdateData_Form.Task_Type }}
                             </div>
                         </div>
                     </div>
                     <div class="form-group mb-3">
-                        <div class="floating-label textfield-box">
-                            <label for="exampleFloatingBox1">Task Description</label>
-                            {{ forms.updateForm.Task_Description }}
+                        <div class="floating-label textfield-box has-value">
+                            <label for="modifyTaskDescription">Task Description</label>
+                            {{ UpdateData_Form.Task_Description }}
                         </div>
                     </div>
                     <div class="form-row mb-3">
                         <div class="col mb-3">
-                            <div class="floating-label textfield-box">
-                                <label for="exampleFloatingLabel2">Start DateTime</label>
-                                {{ forms.updateForm.Task_StartTime }}
+                            <div class="floating-label textfield-box has-value">
+                                <label for="modifyTaskStartTime">Start DateTime</label>
+                                {{ UpdateData_Form.Task_StartTime }}
                             </div>
                         </div>
                         <div class="col">
-                            <div class="floating-label textfield-box">
-                                <label for="exampleFloatingLabel2">End DateTime</label>
-                                {{ forms.updateForm.Task_EndTime }}
+                            <div class="floating-label textfield-box has-value">
+                                <label for="modifyTaskEndTime">End DateTime</label>
+                                {{ UpdateData_Form.Task_EndTime }}
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button name="action" type="submit" value="updateForm" class="btn btn-primary">Update Selected
+                        <button type="button" class="btn btn-secondary cancel-modify-data"
+                            data-dismiss="modal">Cancel</button>
+                        <button name="TaskReferenceID" id="taskReference" type="submit" value="" class="btn btn-primary">Update Selected
                             Data</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
