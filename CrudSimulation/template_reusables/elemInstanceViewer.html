@@ -19,18 +19,6 @@
         {% include "appbar.html" with requireSideNav=True userNameContext=user_instance_name %}
         {% include "databoard.html" %}
 
-    {% elif ClassInstance == "DataAddition" %}
-        {% include "appbar.html" with requireSideNav=True userNameContext=user_instance_name %}
-        {% include "data_entry.html" with currentModifierMode="AddMode" %}
-
-    {% elif ClassInstance == "DataDeletion" %}
-        {% include "appbar.html" with requireSideNav=True userNameContext=user_instance_name %}
-        {% include "data_entry.html" with currentModifierMode="DeleteMode" %}
-
-    {% elif ClassInstance == "DataUpdate" %}
-        {% include "appbar.html" with requireSideNav=True userNameContext=user_instance_name %}
-        {% include "data_entry.html" with currentModifierMode="UpdateMode" %}
-
     {% elif ClassInstance == "UserAuthView" %}
         {% include "appbar.html" with hideLogoutButton=True %}
         {% include "login.html" %}

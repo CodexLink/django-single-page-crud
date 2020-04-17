@@ -55,3 +55,7 @@ $('#actionModifyData').on('show.bs.modal', function (e) {
 $('.cancel-modify-data').click(() => {
     $('tr').removeClass('selected-data');
 });
+
+$('#dismissableModalConfirm').click(() => {
+    $('#actionExportData').modal('hide');
+});

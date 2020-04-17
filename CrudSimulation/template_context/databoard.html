@@ -1,5 +1,6 @@
 {% load static %}
 <div class="container content-offset">
+    {% if not pdfRenderMode == True %}
     <div class="col auto mb-3">
         <div class="card bg-danger">
             <div class="card-header border-0 text-white-primary">
@@ -69,7 +70,6 @@
     {% endif %}
     {% endfor %}
     {% endif %}
-
     <div class="row row-cols-lg-2 row-cols-md-1 row-cols-sm-1 dashboard-grid btn-card-align">
         <div class="col auto mb-3">
             <button class="btn btn-primary" data-toggle="modal" data-target="#actionAddData" type="button">Add
@@ -80,6 +80,7 @@
                 Data to PDF</button>
         </div>
     </div>
+    {% endif %}
     <div class="col auto mb-3">
         <div class="card">
             <table class="table mb-0">
@@ -92,7 +93,7 @@
                         <th scope="col">Start Time</th>
                         <th scope="col">End Time</th>
                         <th scope="col">Created / Modified on</th>
-                        <th scope="col">Actions</th>
+                        {% if not pdfRenderMode == True %}<th scope="col">Actions</th>{% endif %}
                     </tr>
                 </thead>
                 <tbody>
@@ -106,14 +107,17 @@
                         <td id="taskStartTime">{{ AllData.Task_StartTime|date:'M d, Y, g:i a' }}</td>
                         <td id="taskEndTime">{{ AllData.Task_EndTime|date:'M d, Y, g:i a' }}</td>
                         <td id="taskCreateTime">{{ AllData.Task_CreateDate }}</td>
+                        {% if not pdfRenderMode == True %}
                         <td>
                             <button class="btn btn-sm btn-icon" data-toggle="modal" data-target="#actionModifyData"
-                                type="button" data-task-id="{{ AllData.Task_UUID }}"><i class="material-icons">edit</i></button>
-                            <button class="btn btn-sm btn-icon" type="button"
-                                data-toggle="modal" data-task-name="{{ AllData.Task_Name }}" data-target="#actionDeleteSelectedData"
+                                type="button" data-task-id="{{ AllData.Task_UUID }}"><i
+                                    class="material-icons">edit</i></button>
+                            <button class="btn btn-sm btn-icon" type="button" data-toggle="modal"
+                                data-task-name="{{ AllData.Task_Name }}" data-target="#actionDeleteSelectedData"
                                 data-task-id="{{ AllData.Task_UUID }}"><i
                                     class="material-icons">delete_sweep</i></button>
                         </td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                     {% endif %}
@@ -121,6 +125,7 @@
             </table>
             <hr class="my-0 w-100">
             <div class="card-actions align-items-center justify-content-end">
+                {% if not pdfRenderMode == True %}
                 <span class="align-self-center mb-1 mr-2 text-muted d-flex justify-content-between align-items-center"
                     disabled>Table Pagination is not available as well!</span>
                 <span class="align-self-center mb-1 mx-1 text-muted">Rows per table display:</span>
@@ -143,6 +148,11 @@
                                 class="material-icons">chevron_left</i></button>
                         <button class="btn btn-flat" href="#" disabled><i
                                 class="material-icons">chevron_right</i></button>
+
+                        {% else %}
+                        <span class="align-self-center mb-1 mr-2">PDF Rendered with Love by WeasyPrint~ 💓
+                        </span>
+                        {% endif %}
             </div>
         </div>
     </div>

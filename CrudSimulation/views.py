@@ -7,17 +7,22 @@ from django.views.generic import FormView, ListView, RedirectView, CreateView, U
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormMixin
 from django.views.generic.detail import SingleObjectMixin
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from requests.exceptions import RequestException
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.core.files.storage import FileSystemStorage
+from django.template.loader import render_to_string
+from weasyprint import HTML, CSS
 from .forms import *
 from .models import *
+import datetime
 
 template_RequiredEncapped = "elemInstanceViewer.html"
 template_RequiredNoContext = "noContextResponseOnly.html"
+template_pdfRenderer = "pdfRenderer.html"
 
 # ! Source Solution for Two Forms at the same time
 # - https://krzysztofzuraw.com/blog/2016/two-forms-one-view-django.html
@@ -156,8 +161,25 @@ class ExplicitActions(TemplateView):
 
     def get(self, *args, **kwargs):
         if self.Action:
+            # ! Source
+            ## https://simpleisbetterthancomplex.com/tutorial/2016/08/08/how-to-export-to-pdf.html
+
+            pdfFileName = '%s_%s.pdf' % (self.request.user.username, datetime.datetime.now().strftime("%H%M%S%m%d%Y"))
+
             if self.Action == "ExportAll":
-                pass
+                html_string = render_to_string(template_pdfRenderer, {'DataSets': UserTasks.objects.filter(Task_Owner=self.request.user.uuid)})
+                html = HTML(string=html_string).write_pdf(target='userdata/ExportedPDFs/%s' % (pdfFileName), stylesheets=[CSS('CrudSimulation\static\css\material.min.css'), CSS('CrudSimulation\static\css\sc_require-min.css')]);
+                fs = FileSystemStorage('')
+
+                with fs.open("userdata/ExportedPDFs/" + pdfFileName) as pdf:
+                    response = HttpResponse(pdf, content_type='application/pdf')
+                    response['Content-Disposition'] = 'attachment; filename="%s.pdf"' % (pdfFileName)
+                    return response
+
+                return HttpResponseRedirect(reverse('data_user_view'))
+
+
+
             elif "Delete" in self.Action:
                 try:
                     if "All" in self.Action:
