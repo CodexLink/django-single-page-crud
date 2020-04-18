@@ -1,6 +1,6 @@
-# CRUD Simulation for Summer Skilling #1
+# CRUD Simulation for Summer Skilling
 
-Or known as a **Web App Simulation Under One Page CRUD Session.**
+Or known as the **Web App Simulation Under One Page | CRUD Session.**
 
 ## Introduction
 
@@ -20,7 +20,7 @@ Just to make things clear, there will be a lot of dependencies here! Not just th
 
 ```text
 For Clone: https://github.com/cpe-tipqc-community/django-crud-webapp-CodexLink.git
-For Fork: Just press the repository to right fork button...
+For Fork: Just press the fork button of the repository...
 ```
 
 2. Open the Root of the Repository Folder in your favorite IDE.
@@ -67,26 +67,32 @@ Since you have been able to get this far, it's time to set things up in the proj
 
 ## Frequently Asked Questions
 
-- Why are you doing it in Class-Based Views?
+- **Why are you doing it in Class-Based Views?**
   - Two words. ***Minimal***. ***Configuration***. The thing with class-based views is that, you could do basic work without **repeating** your self. Why create another one when they already provided it to you? Though even with customizations, they're quite possible unless complex conditions has to be done. Basically you have to `Base_____View` to do your intended outcomes with `Mixins` or else get the provided once.
 
-- Why would the master register through Command Line instead in the website?
-  - The reason is, I haven't set things up properly. Meaning I haven't implemented the smart `is_user_superuser?` functionality. Since the focus is essentially in the CRUD functionalities. I left that as is. Users who register through the website doesn't have any access to the Django-administration. Which is why, Master person have to start in the command line as he/she/them setup the project.
+- **Why would the master should register through Command Line instead in the website?**
+  - The reason is, I haven't set things up properly. Meaning I haven't implemented the smart `is_user_superuser?` functionality. Since the focus here is the essentiality of the CRUD functionalities. I left that as is. Users who register through the website doesn't have any access to the Django-administration. Which is why, Master person have to start in the command line as he/she/them setup the project.
 
-- So, what are the expected things that I could learn from this repo?
+- **So, what are the expected things that I could learn from this repo?**
   - How you should be well organized from how constructed the content you're trying to generate.
   - How formality(In General) should be one of the priorities when in development. (See Forms File and Django Administration to know what I'm trying to talk about.)
   - How Implementation gives you the ability to debug with ease.
   - How Separating DataSets will help you to do your work by already adapting to DRY principles.
   - I guess there's nothing else. Inspect further for unforeseen learnings.
 
-- Why you do have so many dependencies?
+- **Why you do have so many dependencies?**
   - Module / Library Usage.
 
-- What CSS Framework are you currently using?
+- **Why there's no user forgotten password feature!?**
+  - Technically, not really part of the objective. I'm quite done going any further as I don't know what would be the next move after this requirement submission. You could implement it if you want. Or I may soon if I get the hands of this repository (forked).
+
+- **Why are you making this README longer?**
+  - Not because I have to. I did this because I want to.
+
+- **What CSS Framework are you currently using?**
   - The CSS framework that I'm currently using is [Djibe's Material Design 2](https://github.com/djibe/material) Forked from [Daemonite's Material Design](https://github.com/Daemonite/material) Repository. Please go to [Djibe's Material Design 2](https://github.com/djibe/material) on how to construct CSS and JS files as the repo is in the state of soft-development. Meaning the Releases are not quite as would you expect. You have to do it on your own. (*Spoiler Alert: It requires NPM*)
 
-- Can I use this for personal / non-profit / profit use?
+- **Can I use this for personal / non-profit / profit use?**
   - Sure thing! This repository is under [MIT License](https://github.com/cpe-tipqc-community/django-crud-webapp-CodexLink/blob/master/LICENSE). Please check the file for more information.
 
 ## Credits
@@ -94,7 +100,7 @@ Since you have been able to get this far, it's time to set things up in the proj
 - [djibe](https://github.com/djibe) for Daemonite's Material Design Component Support
 - [Django Class-Based View Inspector](https://ccbv.co.uk/) for inspecting inheritance by acknowledging premade class variables and available functions.
 - [Django-Extensions](https://github.com/django-extensions/django-extensions) for expanding the ability to do more by easing process of particular technical tasks.
-- To someone, who motivates me enough for the cause.
+- To someone that is non-existent who motivates me enough for the cause.
 
 ## License
 
