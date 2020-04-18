@@ -28,7 +28,7 @@ For Fork: Just press the fork button of the repository...
 
 ### Dependencies
 
-3. Assuming that you have Django Installed already. You still have to do `pip freeze` from the root of the repository. This installs the following:
+3. Assuming that you have Django Installed already. You still have to do `pip install -r requirements.txt` from the root of the repository. This installs the following:
 
 ```text
 - Django (Update If Possible Only To 3.0.4)
@@ -36,11 +36,11 @@ For Fork: Just press the fork button of the repository...
 - django-extensions
 ```
 
-Please report any further if I missed some dependencies as the `pipreqs` weren't updating all required dependencies.
+Please report any further if I missed some dependencies as `pipreqs` weren't updating all required dependencies.
 
-After installing dependencies, we're going to the much more complicated stuff. But first, we have to install the ***WeasyPrint Executable Dependencies***.
+After installing dependencies, we're going to the much more complicated stuff. But first, we have to install the ***WeasyPrint Dependencies***.
 
-### WeasyPrint Executable Dependencies
+### WeasyPrint Dependencies
 
 Not going any further to complicate stuff. But you have to follow the instructions on their [website](https://weasyprint.readthedocs.io/en/stable/install.html#windows). It would take you for at least 10 minutes minimum or 30 minutes maximum to set things up.
 
@@ -52,11 +52,11 @@ After all of that (assuming you have tested targetting their site to generate a 
 
 ### Database
 
-The project is currently using `MySQL`. With that, we know that Django doesn't create the tables for you. (That occurs to me...). So you have to create one and name it with `smcrud_db`. Refer to the [settings.py](https://github.com/cpe-tipqc-community/django-crud-webapp-CodexLink/blob/master/CrudSpeedrun/settings.py#L81) for more information.
+The project is currently using `MySQL`. With that, we know that Django doesn't create the tables for you. (That occurs to me...). So you have to create one and name it with `smcrud_db`. Refer to the [settings.py](https://github.com/cpe-tipqc-community/django-crud-webapp-CodexLink/blob/master/CrudSpeedrun/settings.py#L81) for more information about the database settings.
 
 ### Preparation Literal
 
-Since you have been able to get this far, it's time to set things up in the project itself.
+Since you have been able to get this far, it's time to set things the project itself, literally.
 
 1. On the root of the repository, we have apply our models in the database. With that, type `python manage.py makemigrations`.
 2. Once done, type `python manage.py migrate` to apply all migrations that the Django did.
