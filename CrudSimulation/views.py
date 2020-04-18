@@ -1,24 +1,20 @@
-from django.shortcuts import render
-from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
-from django.contrib.auth.views import LoginView, LogoutView, logout_then_login
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy, reverse
-from django.views.generic import FormView, ListView, RedirectView, CreateView, UpdateView
-from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormMixin
-from django.views.generic.detail import SingleObjectMixin
-from django.http import HttpResponseRedirect, HttpResponse
-from requests.exceptions import RequestException
+import datetime
+
 from django.contrib import messages
-from django.contrib.auth import login, logout
-from django.views.decorators.csrf import csrf_exempt
-from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect
 from django.template.loader import render_to_string
-from weasyprint import HTML, CSS
+from django.urls import reverse, reverse_lazy
+from django.views.generic import (
+    CreateView, FormView)
+from django.views.generic.base import TemplateView
+from weasyprint import CSS, HTML
+
 from .forms import *
 from .models import *
-import datetime
 
 template_RequiredEncapped = "elemInstanceViewer.html"
 template_RequiredNoContext = "noContextResponseOnly.html"
@@ -138,8 +134,6 @@ class DataUpdate(LoginRequiredMixin, FormView):
 
     def post(self, request, *args, **kwargs):
         targetFormData = UserTaskUpdateForm(request.POST)
-        import os
-        os.system("CLS")
         if targetFormData.is_valid():
             print(request.POST)
             print("Updating")
@@ -177,8 +171,6 @@ class ExplicitActions(TemplateView):
                     return response
 
                 return HttpResponseRedirect(reverse('data_user_view'))
-
-
 
             elif "Delete" in self.Action:
                 try:
