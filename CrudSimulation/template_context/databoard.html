@@ -2,14 +2,17 @@
 <div class="container content-offset">
     {% if not pdfRenderMode == True %}
     <div class="col auto mb-3">
-        <div class="card bg-danger">
-            <div class="card-header border-0 text-white-primary">
-                <h1 class="card-title">Attention!</h1>
+        <div class="card bg-warning">
+            <div class="card-header border-0 text-dark-primary">
+                <h1 class="card-title">Attention and Announcement!</h1>
             </div>
-            <div class="card-body text-white">
-                <p>The Task DateTime Anti-Conflict/Collision Feature are NOT Implemented! The Date Time Deadline
-                    Detection is made by injecting current computer time in Website Context. And let the website loop
-                    through list to see if it is exceeds the date and time limit.
+            <div class="card-body text-dark-secondary">
+                <p>The Task DateTime Detection and Warner Functionality is not implemented! The prescribed *extra* task
+                    that were provided by the developer were not viable and will be discontinued further.
+                    Some alert notifications on site were missing as well. Such as the success notification of new data
+                    being added and data export success notification. Some notifications that were existing is just an
+                    example that if user did something, they will be notified that something happened.
+                    In the end the CRUD works.
                 </p>
             </div>
         </div>
@@ -80,6 +83,21 @@
                 Data to PDF</button>
         </div>
     </div>
+    {% else %}
+    <div class="col auto mb-3">
+        <div class="card bg-primary">
+            <div class="card-header border-0 text-white-primary">
+                <h1 class="card-title">Data Report</h1>
+            </div>
+            <div class="card-body text-white-secondary">
+                <p>Hello User! This was the current task that you have right now! You have {{ DataSets.count }} tasks
+                    currently inserted! by this point, it is awesome to have a report printed with styling with the use
+                    of WeasyPrint!
+
+                </p>
+            </div>
+        </div>
+    </div>
     {% endif %}
     <div class="col auto mb-3">
         <div class="card">
@@ -142,8 +160,8 @@
                         <a class="dropdown-item" href="#">* (Show All)</a>
                     </div>
                 </div>
-                <span class="align-self-center mb-1 mr-2" disabled>1-{{ DataPayload.count }} of
-                    {{ DataPayload.count }}<span>
+                <span class="align-self-center mb-1 mr-2">{% if DataSets.count %}1{% else %}0{% endif %} of
+                    {{ DataSets.count|default:0 }} <span>
                         <button class="btn btn-flat" href="#" disabled><i
                                 class="material-icons">chevron_left</i></button>
                         <button class="btn btn-flat" href="#" disabled><i
