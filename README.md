@@ -4,7 +4,7 @@ Or known as the **Web App Simulation Under One Page | CRUD Session.**
 
 ## Introduction
 
-Hello! This is a repository that features ***CRUD functionalities*** in Django. With the process, all done in one page! Means, multiple forms were spawn in modals from which the data has to be filled. This repository consisting of Class-Based Views and Slight Manipulation on Code. Also, this repository has some parts / components used from the [****SmartClassroomSystem Repository****](https://github.com/CodexLink/SmartClassroomSystem) . You could check that if you're interested on what parts I used on that repository.
+Hello! This is a repository that features ***CRUD functionalities*** in Django. With the process, all done in one page! Means, multiple forms were spawn in modals from which the data has to be filled. With export feature as well. This repository consisting of Class-Based Views and Slight Manipulation on Code. Also, this repository has some parts / components used from the [****SmartClassroomSystem Repository****](https://github.com/CodexLink/SmartClassroomSystem). You could check that if you're interested on what parts I used on that repository.
 
 ## So, What's the difference between your work and other works?
 
