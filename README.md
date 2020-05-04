@@ -6,7 +6,7 @@ Or known as the **Web App Simulation Under One Page | CRUD Session.**
 
 Hello! This is a repository that features ***CRUD functionalities*** in Django. With the process, all done in one page! Means, multiple forms were spawn in modals from which the data has to be filled. With export feature as well. This repository consisting of Class-Based Views and Slight Manipulation on Code. Also, this repository has some parts / components used from the [****SmartClassroomSystem Repository****](https://github.com/CodexLink/SmartClassroomSystem). You could check that if you're interested on what parts I used on that repository.
 
-## So, What's the difference between your work and other works?
+## So, What's the difference between your work and other works
 
 I usually can't tell. But I think it is all about implementation that make things different here. But in my case, I used a method that avoids transitioning to another page to do the process. I want to do the processes in the same page. This means, I'm using only one page along with modals that generates form inside on it within different instances. Which then means, different intentions.
 
@@ -19,7 +19,7 @@ Just to make things clear, there will be a lot of dependencies here! Not just th
 1. Do the git clone! Or, you can fork the repository as well!
 
 ```text
-For Clone: https://github.com/cpe-tipqc-community/django-crud-webapp-CodexLink.git
+For Clone: https://github.com/CodexLink/AdvancedCRUD-Django.git
 For Fork: Just press the fork button of the repository...
 ```
 
@@ -52,7 +52,7 @@ After all of that (assuming you have tested targetting their site to generate a 
 
 ### Database
 
-The project is currently using `MySQL`. With that, we know that Django doesn't create the tables for you. (That occurs to me...). So you have to create one and name it with `smcrud_db`. Refer to the [settings.py](https://github.com/cpe-tipqc-community/django-crud-webapp-CodexLink/blob/master/CrudSpeedrun/settings.py#L81) for more information about the database settings.
+The project is currently using `MySQL`. With that, we know that Django doesn't create the tables for you. (That occurs to me...). So you have to create one and name it with `smcrud_db`. Refer to the [settings.py](https://github.com/CodexLink/AdvancedCRUD-Django/blob/master/CrudSpeedrun/settings.py#L81) for more information about the database settings.
 
 ### Preparation Literal
 
@@ -93,7 +93,7 @@ Since you have been able to get this far, it's time to set things the project it
   - The CSS framework that I'm currently using is [Djibe's Material Design 2](https://github.com/djibe/material) Forked from [Daemonite's Material Design](https://github.com/Daemonite/material) Repository. Please go to [Djibe's Material Design 2](https://github.com/djibe/material) on how to construct CSS and JS files as the repo is in the state of soft-development. Meaning the Releases are not quite as would you expect. You have to do it on your own. (*Spoiler Alert: It requires NPM*)
 
 - **Can I use this for personal / non-profit / profit use?**
-  - Sure thing! This repository is under [MIT License](https://github.com/cpe-tipqc-community/django-crud-webapp-CodexLink/blob/master/LICENSE). Please check the file for more information.
+  - Sure thing! This repository is under [MIT License](https://github.com/CodexLink/AdvancedCRUD-Django/blob/master/LICENSE). Please check the file for more information.
 
 ## Credits
 
@@ -104,4 +104,4 @@ Since you have been able to get this far, it's time to set things the project it
 
 ## License
 
-This repository is currently licensed in MIT License. Please see the [LICENSE](https://github.com/cpe-tipqc-community/django-crud-webapp-CodexLink/blob/master/LICENSE) File in the Repository for more information.
+This repository is currently licensed in MIT License. Please see the [LICENSE](https://github.com/CodexLink/AdvancedCRUD-Django/blob/master/LICENSE) File in the Repository for more information.
