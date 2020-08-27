@@ -1,4 +1,4 @@
-# CRUD Simulation for Summer Skilling
+# Django Simulated Single Page Application CRUD for Summer Skilling
 
 Or known as the **Web App Simulation Under One Page | CRUD Session.**
 
